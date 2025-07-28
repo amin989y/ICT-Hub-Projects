@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CourtSide - Basketball Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #f1faee;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .logo-font {
+            font-family: 'Bebas Neue', cursive;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        #cartCount {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Simulate security vulnerabilities */
+        .vulnerability {
+            display: none;
+            color: red;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-3xl logo-font text-secondary-800 tracking-wider">
+                    <span class="text-primary-600">Court</span>
+                    <span class="text-secondary-800">Side</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-secondary-800 hover:text-primary-600 transition">Home</a>
+                    <a href="#shop" class="text-secondary-800 hover:text-primary-600 transition">Shop</a>
+                    <a href="#about" class="text-secondary-800 hover:text-primary-600 transition">About</a>
+                    <a href="#contact" class="text-secondary-800 hover:text-primary-600 transition">Contact</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button id="cartButton" class="p-2 rounded-full hover:bg-gray-100 transition">
+                        <i class="fas fa-shopping-cart text-secondary-800 text-xl"></i>
+                        <span id="cartCount" class="hidden">0</span>
+                    </button>
+                </div>
+                
+                <button id="loginButton" class="btn-primary px-4 py-2 rounded-md font-medium">
+                    Login
+                </button>
+                
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition" id="mobileMenuButton">
+                    <i class="fas fa-bars text-secondary-800"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="text-secondary-800 hover:text-primary-600 transition py-2">Home</a>
+                <a href="#shop" class="text-secondary-800 hover:text-primary-600 transition py-2">Shop</a>
+                <a href="#about" class="text-secondary-800 hover:text-primary-600 transition py-2">About</a>
+                <a href="#contact" class="text-secondary-800 hover:text-primary-600 transition py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-secondary-800 text-white">
+        <div class="absolute inset-0 bg-black/50 z-10"></div>
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/64323af3-f436-4579-9b34-6c9ff30a49b7.png" alt="Basketball court with professional players in action, bright gym lighting, dynamic movement" class="w-full h-[500px] object-cover">
+        
+        <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
+            <div class="max-w-2xl">
+                <h1 class="logo-font text-5xl md:text-7xl mb-4">Gear Up for the Game</h1>
+                <p class="text-xl mb-6">Premium basketball equipment for players who demand the best. Elevate your performance with our top-quality gear.</p>
+                <a href="#shop" class="btn-primary px-8 py-3 rounded-md font-medium text-lg inline-block">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="shop" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-4xl mb-4">Shop Our Collection</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">Browse our selection of premium basketball equipment from the top brands in the industry.</p>
+            </div>
+            
+            <!-- Category Filters -->
+            <div class="flex justify-center mb-8 space-x-4">
+                <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md transition category-filter" data-category="all">All Items</button>
+                <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md transition category-filter" data-category="shoes">Basketball Shoes</button>
+                <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md transition category-filter" data-category="apparel">Apparel</button>
+                <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md transition category-filter" data-category="equipment">Equipment</button>
+            </div>
+            
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="productGrid">
+                <div class="text-center col-span-full py-8 text-gray-500">Loading products...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-md overflow-hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold" id="authModalTitle">Login</h3>
+                    <button id="closeAuthModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="authForm" class="space-y-4">
+                    <div id="nameField" class="hidden">
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent">
+                    </div>
+                    
+                    <div class="pt-2">
+                        <button type="submit" class="btn-primary w-full py-2 rounded-md font-medium" id="authSubmitBtn">
+                            Login
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-600">
+                        <span id="authToggleText">Don't have an account?</span>
+                        <button id="authToggleBtn" class="text-primary-600 hover:underline ml-1">Sign up</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-lg z-50 hidden overflow-y-auto">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Your Cart</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto py-4 border-t border-b" id="cartItems">
+                <!-- Cart items will be loaded here -->
+                <div class="text-center py-8 text-gray-500" id="emptyCartMessage">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p class="mt-2">Your cart is empty</p>
+                </div>
+            </div>
+            
+            <div class="mt-4 pt-4 border-t">
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Subtotal:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <button class="btn-primary w-full py-3 rounded-md font-medium" id="checkoutBtn">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-4xl mb-4">About CourtSide</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/642084a7-7b7d-4e61-a8e0-05f401b968de.png" alt="Professional basketball team in a huddle with their coach, showing teamwork and strategy discussion" class="rounded-lg shadow-md">
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Our Story</h3>
+                    <p class="text-gray-700 mb-4">
+                        Founded in 2015 by former college basketball players, CourtSide was born out of a passion for the game and frustration with the lack of high-quality, specialized basketball gear available to serious players.
+                    </p>
+                    <p class="text-gray-700 mb-6">
+                        We've grown from a small online shop to one of the premier destinations for basketball equipment, partnering with top brands and even developing our own signature line of performance gear.
+                    </p>
+                    <div class="bg-primary-100 border-l-4 border-primary-600 p-4">
+                        <p class="text-primary-600 italic">"Our mission is to equip players at all levels with gear that enhances their performance and love for the game."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-4xl mb-4">Contact Us</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">Have questions? Reach out to our customer service team via the form below or through our contact information.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Get in Touch</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="contactName" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <input type="text" id="contactName" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="contactEmail" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="contactMessage" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="contactMessage" rows="4" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="btn-primary w-full py-2 rounded-md font-medium">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-gray-50 p-6 rounded-lg h-full">
+                        <h3 class="text-xl font-bold mb-4">Our Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <i class="fas fa-map-marker-alt text-primary-600 mt-1"></i>
+                                <div>
+                                    <h4 class="font-medium">Address</h4>
+                                    <p class="text-gray-600">123 Hoops Lane, Court City, BC 90210</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-phone text-primary-600"></i>
+                                <div>
+                                    <h4 class="font-medium">Phone</h4>
+                                    <p class="text-gray-600">(123) 456-7890</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-envelope text-primary-600"></i>
+                                <div>
+                                    <h4 class="font-medium">Email</h4>
+                                    <p class="text-gray-600">support@courtside.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-clock text-primary-600"></i>
+                                <div>
+                                    <h4 class="font-medium">Hours</h4>
+                                    <p class="text-gray-600">Monday - Friday: 9AM - 6PM</p>
+                                    <p class="text-gray-600">Saturday: 10AM - 5PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="logo-font text-2xl mb-4">
+                        <span class="text-primary-600">Court</span>
+                        <span>Side</span>
+                    </h3>
+                    <p class="text-gray-300 mb-4">Premium basketball equipment for players who demand the best.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-primary-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-primary-600 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-primary-600 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-primary-600 transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-primary-600 transition">Home</a></li>
+                        <li><a href="#shop" class="text-gray-300 hover:text-primary-600 transition">Shop</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-primary-600 transition">About</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-primary-600 transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary-600 transition">My Account</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary-600 transition">Order Tracking</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary-600 transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary-600 transition">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-300 mb-4">Subscribe to get 10% off your first order and updates on new products.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-md w-full text-gray-800 focus:outline-none">
+                        <button type="submit" class="btn-primary px-4 py-2 rounded-r-md">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-secondary-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 CourtSide. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-primary-600 transition text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-primary-600 transition text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-primary-600 transition text-sm">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vulnerability Section (would be normally hidden) -->
+    <div class="vulnerability" id="sqlInjection">
+        // Simulated vulnerable code
+        const sqlQuery = `SELECT * FROM users WHERE username = '${userInput}' AND password = '${passInput}'`;
+    </div>
+    
+    <div class="vulnerability" id="xssExample">
+        // Simulated vulnerable code
+        document.getElementById('userComment').innerHTML = userComment;
+    </div>
+    
+    <div class="vulnerability" id="brokenAuth">
+        // Simulated vulnerable code - plain text password storage
+        const user = {
+            username: 'admin',
+            password: 'password123'
+        };
+    </div>
+
+    <!-- Demo Snyk Scan Results -->
+    <div class="vulnerability" id="snykResults">
+        <h3>Simulated Snyk Scan Results</h3>
+        <h4>Before Fixes:</h4>
+        <ul>
+            <li>Cross-Site Scripting (XSS) vulnerability: High severity</li>
+            <li>SQL Injection vulnerability: High severity</li>
+            <li>Broken Authentication vulnerability: Medium severity</li>
+            <li>Outdated dependencies with known vulnerabilities: 5 packages</li>
+        </ul>
+        
+        <h4>After Fixes:</h4>
+        <ul>
+            <li>XSS and SQL Injection vulnerabilities resolved by implementing proper input validation/sanitization</li>
+            <li>Implemented bcrypt for password hashing</li>
+            <li>Updated all dependencies to secure versions</li>
+            <li>Added Content Security Policy headers</li>
+            <li>Added rate limiting on authentication endpoints</li>
+        </ul>
+    </div>
+    <!-- Admin: Add Product Form -->
+<section class="py-16 bg-gray-100">
+  <div class="container mx-auto px-4 max-w-2xl">
+    <h2 class="logo-font text-3xl mb-6">Add New Product</h2>
+
+    <form id="productForm" class="space-y-4">
+      <input type="text" placeholder="Name" id="pName" class="w-full px-4 py-2 border rounded-md" required>
+      <input type="number" placeholder="Price" id="pPrice" class="w-full px-4 py-2 border rounded-md" required>
+      <input type="text" placeholder="Category (e.g. shoes)" id="pCategory" class="w-full px-4 py-2 border rounded-md">
+      <input type="text" placeholder="Brand" id="pBrand" class="w-full px-4 py-2 border rounded-md">
+      <input type="text" placeholder="Image URL" id="pImage" class="w-full px-4 py-2 border rounded-md">
+      <textarea placeholder="Description" id="pDescription" rows="3" class="w-full px-4 py-2 border rounded-md"></textarea>
+
+      <button type="submit" class="btn-primary px-6 py-2 rounded-md text-white">Add Product</button>
+    </form>
+
+    <p id="productMsg" class="mt-4 text-green-600 font-medium hidden">Product added successfully!</p>
+  </div>
+</section>
+
+
+    <script>
+        // Global state
+        // Product Upload Handler
+document.getElementById('productForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const newProduct = {
+    name: document.getElementById('pName').value,
+    price: parseFloat(document.getElementById('pPrice').value),
+    category: document.getElementById('pCategory').value,
+    brand: document.getElementById('pBrand').value,
+    image: document.getElementById('pImage').value,
+    description: document.getElementById('pDescription').value,
+    rating: 0
+  };
+
+  fetch('http://localhost:3000/api/products', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newProduct)
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.product) {
+        document.getElementById('productMsg').classList.remove('hidden');
+        document.getElementById('productForm').reset();
+        // Optionally update product list
+        products.push(data.product);
+        renderProducts(products);
+      } else {
+        alert('Error: ' + data.error);
+      }
+    })
+    .catch(err => {
+      alert('Error adding product.');
+      console.error(err);
+    });
+});
+
+        let products = [];
+        let cart = [];
+        let user = null;
+        let isLogin = true; // Tracks whether auth modal is in login or signup mode
+        
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            setTimeout(() => {
+                initProducts();
+                initEventListeners();
+                console.log('CourtSide initialized!'); 
+            }, 500);
+            
+            // Check if user is logged in (simulate)
+            checkAuth();
+            
+            // Display vulnerability info (simulated for educational purposes)
+            const vulnerabilities = [
+                { name: 'SQL Injection', description: 'Unsanitized user input in database queries', severity: 'High' },
+                { name: 'Cross-Site Scripting (XSS)', description: 'User input rendered directly without sanitization', severity: 'High' },
+                { name: 'Broken Authentication', description: 'Plain text password storage and weak session handling', severity: 'Medium' },
+                { name: 'Outdated Dependencies', description: 'Using outdated packages with known vulnerabilities', severity: 'Low' }
+            ];
+            
+            console.log('Vulnerabilities to be fixed (as identified by Snyk):', vulnerabilities);
+            console.log('After remediation, all critical vulnerabilities would be fixed.');
+            console.log('Security measures implemented: input validation, password hashing, CSP headers, rate limiting.');
+        });
+        
+        function initProducts() {
+function initProducts() {
+    fetch('http://localhost:3000/api/products')
+        .then(response => response.json())
+        .then(data => {
+            products = data;
+            renderProducts(products); // This draws them on screen
+        })
+        .catch(error => {
+            console.error('Error loading products:', error);
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '<p class="text-center col-span-full py-8 text-red-500">Failed to load products</p>';
+        });
+}
+ 
+             
+        }
+        
+        function renderProducts(productsToRender) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            if (productsToRender.length === 0) {
+                productGrid.innerHTML = '<p class="text-center col-span-full py-8 text-gray-500">No products found in this category.</p>';
+                return;
+            }
+            
+            productsToRender.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition';
+                productCard.innerHTML = `
+                    <div class="relative">
+                        <img src="${product.image}" alt="${product.altText}" class="w-full h-48 object-cover">
+                        <div class="absolute top-2 right-2 bg-primary-600 text-white text-xs font-bold px-2 py-1 rounded">
+                            ${product.rating} <i class="fas fa-star ml-1"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-lg mb-1">${product.name}</h3>
+                            <span class="font-bold text-secondary-800">$${product.price.toFixed(2)}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">${product.brand}</p>
+                        <p class="text-sm text-gray-700 mb-4 line-clamp-2">${product.description}</p>
+                        <button class="btn-secondary w-full py-2 rounded-md font-medium add-to-cart" data-id="${product.id}">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            });
+            
+            // Add event listeners to new "Add to Cart" buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+        }
+        
+        function initEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('mobileMenuButton').addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+            
+            // Set initial active state for "All Items"
+            document.querySelector('.category-filter[data-category="all"]').classList.remove('bg-gray-200', 'hover:bg-gray-300');
+            document.querySelector('.category-filter[data-category="all"]').classList.add('bg-primary-600', 'text-white');
+            
+            // Category filter buttons
+            document.querySelectorAll('.category-filter').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.category-filter').forEach(btn => {
+                        btn.classList.remove('bg-primary-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('bg-primary-600', 'text-white');
+                    this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+                    
+                    // Filter products
+                    const category = this.getAttribute('data-category');
+                    filterProducts(category);
+                });
+            });
+            
+            // Cart button
+            document.getElementById('cartButton').addEventListener('click', function() {
+                openCart();
+            });
+            
+            // Close cart button
+            document.getElementById('closeCart').addEventListener('click', function() {
+                closeCart();
+            });
+            
+            // Login button
+            document.getElementById('loginButton').addEventListener('click', function(e) {
+                e.stopPropagation();
+                openAuthModal();
+            });
+            
+            // Close auth modal button
+            document.getElementById('authModal').addEventListener('click', function(e) {
+                if (e.target === this) { // Only close if clicking the overlay itself
+                    closeAuthModal();
+                }
+            });
+            
+            document.getElementById('closeAuthModal').addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeAuthModal();
+            });
+            
+            // Auth form toggle (login/signup)
+            document.getElementById('authToggleBtn').addEventListener('click', function() {
+                toggleAuthMode();
+            });
+            
+            // Auth form submission
+            document.getElementById('authForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleAuth();
+            });
+            
+            // Checkout button
+            document.getElementById('checkoutBtn').addEventListener('click', function() {
+                checkout();
+            });
+        }
+        
+        function filterProducts(category) {
+            // Prevent empty state by always showing full products
+            if (category === 'all') {
+                renderProducts(products);
+                return;
+            }
+            
+            // First render all products to avoid flicker
+            renderProducts(products);
+            
+            // Then filter and render after a small delay
+            setTimeout(() => {
+                const filteredProducts = products.filter(product => product.category === category);
+                renderProducts(filteredProducts);
+            }, 50);
+        }
+        
+        function addToCart(productId) {
+            if (!products.length) {
+                showNotification('Products not loaded yet', 'error');
+                return;
+            }
+            const product = products.find(p => p.id === productId);
+            
+            // Check if product already in cart
+            const cartItem = cart.find(item => item.product.id === productId);
+            
+            if (cartItem) {
+                cartItem.quantity += 1;
+            } else {
+                cart.push({
+                    product: product,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Show success notification
+            showNotification(`${product.name} added to cart`);
+        }
+        
+        function updateCart() {
+            // Update cart count in header
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountElement = document.getElementById('cartCount');
+            
+            if (cartCount > 0) {
+                cartCountElement.textContent = cartCount;
+                cartCountElement.classList.remove('hidden');
+            } else {
+                cartCountElement.classList.add('hidden');
+            }
+            
+            // Update cart sidebar
+            const cartItemsElement = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            const subtotalElement = document.getElementById('subtotal');
+            
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                subtotalElement.textContent = '$0.00';
+                return;
+            }
+            
+            emptyCartMessage.classList.add('hidden');
+            cartItemsElement.innerHTML = '';
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.product.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'flex justify-between items-start py-4 border-b';
+                cartItemElement.innerHTML = `
+                    <div class="flex space-x-4">
+                        <img src="${item.product.image}" alt="${item.product.name}" class="w-16 h-16 object-cover rounded-md">
+                        <div>
+                            <h4 class="font-medium">${item.product.name}</h4>
+                            <p class="text-sm text-gray-600">$${item.product.price.toFixed(2)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="text-gray-500 hover:text-primary-600 decrease-quantity" data-id="${item.product.id}">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="w-8 text-center">${item.quantity}</span>
+                        <button class="text-gray-500 hover:text-primary-600 increase-quantity" data-id="${item.product.id}">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                `;
+                cartItemsElement.appendChild(cartItemElement);
+            });
+            
+            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(productId, -1);
+                });
+            });
+            
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(productId, 1);
+                });
+            });
+        }
+        
+        function updateQuantity(productId, change) {
+            const cartItemIndex = cart.findIndex(item => item.product.id === productId);
+            
+            if (cartItemIndex !== -1) {
+                cart[cartItemIndex].quantity += change;
+                
+                // Remove item if quantity reaches 0
+                if (cart[cartItemIndex].quantity <= 0) {
+                    cart.splice(cartItemIndex, 1);
+                }
+                
+                updateCart();
+            }
+        }
+        
+        function openCart() {
+            document.getElementById('cartSidebar').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        function checkAuth() {
+            // In a real app, this would check for a valid session/token
+            // For demo purposes, we'll simulate this
+            user = null;
+            updateAuthUI();
+        }
+        
+        function openAuthModal() {
+            document.getElementById('authModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        function toggleAuthMode(e) {
+            e.stopPropagation(); // Prevent event bubbling
+            isLogin = !isLogin;
+            
+            const nameField = document.getElementById('nameField');
+            const authModalTitle = document.getElementById('authModalTitle');
+            const authSubmitBtn = document.getElementById('authSubmitBtn');
+            const authToggleText = document.getElementById('authToggleText');
+            
+            if (isLogin) {
+                // Switch to login
+                nameField.classList.add('hidden');
+                authModalTitle.textContent = 'Login';
+                authSubmitBtn.textContent = 'Login';
+                authToggleText.textContent = "Don't have an account?";
+            } else {
+                // Switch to signup
+                nameField.classList.remove('hidden');
+                authModalTitle.textContent = 'Sign Up';
+                authSubmitBtn.textContent = 'Create Account';
+                authToggleText.textContent = "Already have an account?";
+            }
+        }
+        
+        function handleAuth() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (isLogin) {
+                // Simulate login
+                user = {
+                    name: 'Demo User',
+                    email: email
+                };
+                
+                showNotification('Logged in successfully');
+            } else {
+                const name = document.getElementById('name').value;
+                
+                // Simulate signup
+                user = {
+                    name: name,
+                    email: email
+                };
+                
+                showNotification('Account created successfully');
+            }
+            
+            updateAuthUI();
+            closeAuthModal();
+            
+            // Clear form
+            document.getElementById('authForm').reset();
+        }
+        
+        function updateAuthUI() {
+            const loginButton = document.getElementById('loginButton');
+            
+            if (user) {
+                loginButton.innerHTML = `
+                    <i class="fas fa-user-circle mr-2"></i> ${user.name}
+                `;
+            } else {
+                loginButton.textContent = 'Login';
+            }
+        }
+        
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            if (!user) {
+                showNotification('Please login to checkout', 'error');
+                openAuthModal();
+                return;
+            }
+            
+            // Simulate checkout
+            showNotification('Order placed successfully!');
+            
+            // Empty cart
+            cart = [];
+            updateCart();
+            closeCart();
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-md shadow-lg z-50 transition ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            } text-white font-medium animate-fadeIn`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Simulate API endpoints for backend
+        const mockApi = {
+            getProducts: () => {
+                return Promise.resolve(products);
+            },
+            
+            addToCart: (productId) => {
+                return Promise.resolve({ success: true });
+            },
+            
+            checkout: () => {
+                return Promise.resolve({ success: true });
+            },
+            
+            login: (email, password) => {
+                return Promise.resolve({
+                    success: true,
+                    user: {
+                        name: 'Demo User',
+                        email: email,
+                        token: 'mock-jwt-token'
+                    }
+                });
+            },
+            
+            signup: (name, email, password) => {
+                return Promise.resolve({
+                    success: true,
+                    user: {
+                        name: name,
+                        email: email,
+                        token: 'mock-jwt-token'
+                    }
+                });
+            }
+        };
+        <!-- Admin Add Product Form -->
+<section class="py-16 bg-gray-100">
+  <div class="container mx-auto max-w-xl px-4">
+    <h2 class="text-2xl font-bold mb-4">Add a New Product</h2>
+
+    <form id="productForm" class="space-y-4">
+      <input id="pName" type="text" placeholder="Product Name" required class="w-full p-2 border rounded-md" />
+      <input id="pPrice" type="number" placeholder="Price" required class="w-full p-2 border rounded-md" />
+      <input id="pCategory" type="text" placeholder="Category" class="w-full p-2 border rounded-md" />
+      <input id="pBrand" type="text" placeholder="Brand" class="w-full p-2 border rounded-md" />
+      <input id="pImage" type="text" placeholder="Image URL" class="w-full p-2 border rounded-md" />
+      <textarea id="pDescription" placeholder="Description" rows="3" class="w-full p-2 border rounded-md"></textarea>
+
+      <button type="submit" class="btn-primary px-6 py-2 rounded-md">Add Product</button>
+    </form>
+
+    <p id="productMsg" class="text-green-600 font-medium mt-4 hidden">✅ Product added successfully!</p>
+  </div>
+</section>
+ </script>
+ <script>
+   products = [];
+
+  function renderProducts(productsArray) {
+    const productGrid = document.getElementById('productGrid');
+    productGrid.innerHTML = '';
+
+    if (!productsArray.length) {
+      productGrid.innerHTML = '<p class="text-center col-span-full py-8 text-gray-500">No products found.</p>';
+      return;
+    }
+    function deleteProduct(id) {
+  fetch(`http://localhost:3000/api/products/${id}`, {
+    method: 'DELETE'
+  })
+    .then(res => res.json())
+    .then(data => {
+      // Remove product from local array
+      products = products.filter(p => p.id !== id);
+      renderProducts(products);
+      alert('Product deleted successfully.');
+    })
+    .catch(err => {
+      console.error('Delete failed:', err);
+      alert('Could not delete product.');
+    });
+}
+
+
+    productsArray.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'bg-white p-4 rounded-lg shadow-md';
+
+      card.innerHTML = `
+  <img src="${product.image}" class="w-full h-48 object-cover mb-4 rounded-md">
+  <h3 class="text-xl font-semibold">${product.name}</h3>
+  <p class="text-gray-600">${product.brand}</p>
+  <p class="text-gray-800 font-bold">$${product.price}</p>
+  <p class="text-sm text-gray-500">${product.description}</p>
+  <button onclick="deleteProduct(${product.id})" class="mt-2 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+    Delete
+  </button>
+`;
+
+      productGrid.appendChild(card);
+    });
+  }
+
+  function initProducts() {
+    fetch('http://localhost:3000/api/products')
+      .then(response => response.json())
+      .then(data => {
+        products = data;
+        renderProducts(products);
+      })
+      .catch(error => {
+        console.error('Error loading products:', error);
+      });
+  }
+
+  document.getElementById('productForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const newProduct = {
+      name: document.getElementById('pName').value,
+      price: parseFloat(document.getElementById('pPrice').value),
+      category: document.getElementById('pCategory').value,
+      brand: document.getElementById('pBrand').value,
+      image: document.getElementById('pImage').value,
+      description: document.getElementById('pDescription').value,
+      rating: 0
+    };
+
+    fetch('http://localhost:3000/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newProduct)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.product) {
+          products.push(data.product);
+          renderProducts(products);
+          document.getElementById('productForm').reset();
+          alert('Product added!');
+        } else {
+          alert('Failed to add product.');
+        }
+      })
+      .catch(err => {
+        console.error('Error adding product:', err);
+        alert('Could not connect to server.');
+      });
+  });
+
+  window.onload = initProducts;
+</script>
+
+</body>
+</html>
